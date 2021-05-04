@@ -7,12 +7,14 @@
 # More info about color codes in https://en.wikipedia.org/wiki/ANSI_escape_code
 
 
-PROMPT_CHAR=${POWERLINE_PROMPT_CHAR:=""}
-POWERLINE_LEFT_SEPARATOR=" "
-POWERLINE_PROMPT="last_status user_info cwd scm"
+# PROMPT_CHAR=${POWERLINE_PROMPT_CHAR:=""}
+PROMPT_CHAR=${POWERLINE_PROMPT_CHAR:=""}
+POWERLINE_LEFT_SEPARATOR=""
+# POWERLINE_PROMPT="last_status user_info cwd scm"
+POWERLINE_PROMPT="user_info cwd scm"
 
 USER_INFO_SSH_CHAR=" "
-USER_INFO_PROMPT_COLOR="C B"
+USER_INFO_PROMPT_COLOR="W Bl" #name coloring
 
 SCM_GIT_CHAR=" "
 SCM_PROMPT_CLEAN=""
@@ -27,15 +29,15 @@ SCM_PROMPT_STAGED_COLOR="Y Bl"
 SCM_PROMPT_UNSTAGED_COLOR="R Bl"
 SCM_PROMPT_COLOR=${SCM_PROMPT_CLEAN_COLOR}
 
-CWD_PROMPT_COLOR="B C"
+CWD_PROMPT_COLOR="G W"
 
-STATUS_PROMPT_COLOR="Bl R B"
+STATUS_PROMPT_COLOR="Bl R G"
 STATUS_PROMPT_ERROR="✘"
-STATUS_PROMPT_ERROR_COLOR="Bl R B"
+STATUS_PROMPT_ERROR_COLOR="Bl R G"
 STATUS_PROMPT_ROOT="⚡"
-STATUS_PROMPT_ROOT_COLOR="Bl Y B"
+STATUS_PROMPT_ROOT_COLOR="Bl Y G"
 STATUS_PROMPT_JOBS="●"
-STATUS_PROMPT_JOBS_COLOR="Bl Y B"
+STATUS_PROMPT_JOBS_COLOR="Bl Y G"
 
 function __color {
   local bg
@@ -49,7 +51,7 @@ function __color {
      'B') bg=44;;
      'M') bg=45;;
      'C') bg=46;;
-     'W') bg=47;;
+     'W') bg=107;;
      *) bg=49;;
   esac
 
@@ -61,7 +63,7 @@ function __color {
      'B') fg=34;;
      'M') fg=35;;
      'C') fg=36;;
-     'W') fg=37;;
+     'W') fg=97;;
      *) fg=39;;
   esac
 
@@ -79,9 +81,9 @@ function __powerline_user_info_prompt {
   local user_info=""
   local color=${USER_INFO_PROMPT_COLOR}
   if [[ -n "${SSH_CLIENT}" ]]; then
-    user_info="${USER_INFO_SSH_CHAR}\u@\h"
+    user_info=" ${USER_INFO_SSH_CHAR}\u@\h"
   else
-    user_info="\u@\h"
+    user_info=" \u"
   fi
   [[ -n "${user_info}" ]] && echo "${user_info}|${color}"
 }
